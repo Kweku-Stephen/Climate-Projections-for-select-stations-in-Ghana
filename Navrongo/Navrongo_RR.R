@@ -544,91 +544,91 @@ split(
 
 
 
-dplyr::full_join(
-		Navrongo_RR_Corrected_unduplicated[[1]],
-		data.frame(data.frame(Date = seq(as.Date("1951-01-01"), as.Date("2100-12-31"), by = "day")))
-)
-
-
-
-
-lapply(
-	Navrongo_RR_Corrected_unduplicated,
-	\(data = "") any(duplicated(data[ ,"Date"]))
-)
-
-
-
-
-
-Navrongo_RR_Corrected %<>%
-	lapply(
-		#Navrongo_RR_Corrected,
-		\(datatable = "", var = "") {
-			
-			# Function to test for duplicates using Date object
-			chk_dups <- function(data = "", date = "") any(duplicated(data[ ,Date]))
-			
-			# Testing for duplicates in the Date object of the datatable
-			if(chk_dups(data = datatable) == TRUE){
-				datatable[!is.na(datatable[ ,var]), ]
-			} else {
-				datatable
-			}
-		},
-		var = "Rain"
-	)
-
-
-
-
-
-
-
-
-
-
-# Checking for Duplicates in the Date column again
-lapply(
-	Navrongo_RR_Corrected,
-	\(datatable = "") datatable[duplicated(datatable[ ,Date]), ]
-)
-
-
-
-Navrongo_RR_Corrected %<>%
-	lapply(
-		\(datatable = "") datatable[!is.na(datatable[ ,Date]), ] 
-	)
-
-
-
- 	# removing all NAs from the "rain" variable for each model data
-	lapply(
-	\(datatable = "") datatable[!is.na(datatable[ ,Rain]), ]
-) |> 
-	
-
-
-
-
-
-
-
-
-
-lapply(
-	Navrongo_RR_Corrected_uncorrected,
-	#Ananymous function to create a date class and remove the variable "UNCORRECTED"
-	\(datatable = "") {
-		datatable[c(1:4)] <- data.table::data.table(
-			as.Date(
-				paste(datatable[ ,YEAR], datatable[ ,MONTH], datatable[ ,DAY], sep = "-"), 
-				format = "%Y-%m-%e"
-			),
-			NULL,
-			NULL,
-			NULL
-		)
-	}
-)
+# dplyr::full_join(
+# 		Navrongo_RR_Corrected_unduplicated[[1]],
+# 		data.frame(data.frame(Date = seq(as.Date("1951-01-01"), as.Date("2100-12-31"), by = "day")))
+# )
+# 
+# 
+# 
+# 
+# lapply(
+# 	Navrongo_RR_Corrected_unduplicated,
+# 	\(data = "") any(duplicated(data[ ,"Date"]))
+# )
+# 
+# 
+# 
+# 
+# 
+# Navrongo_RR_Corrected %<>%
+# 	lapply(
+# 		#Navrongo_RR_Corrected,
+# 		\(datatable = "", var = "") {
+# 			
+# 			# Function to test for duplicates using Date object
+# 			chk_dups <- function(data = "", date = "") any(duplicated(data[ ,Date]))
+# 			
+# 			# Testing for duplicates in the Date object of the datatable
+# 			if(chk_dups(data = datatable) == TRUE){
+# 				datatable[!is.na(datatable[ ,var]), ]
+# 			} else {
+# 				datatable
+# 			}
+# 		},
+# 		var = "Rain"
+# 	)
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# # Checking for Duplicates in the Date column again
+# lapply(
+# 	Navrongo_RR_Corrected,
+# 	\(datatable = "") datatable[duplicated(datatable[ ,Date]), ]
+# )
+# 
+# 
+# 
+# Navrongo_RR_Corrected %<>%
+# 	lapply(
+# 		\(datatable = "") datatable[!is.na(datatable[ ,Date]), ] 
+# 	)
+# 
+# 
+# 
+#  	# removing all NAs from the "rain" variable for each model data
+# 	lapply(
+# 	\(datatable = "") datatable[!is.na(datatable[ ,Rain]), ]
+# ) |> 
+# 	
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# lapply(
+# 	Navrongo_RR_Corrected_uncorrected,
+# 	#Ananymous function to create a date class and remove the variable "UNCORRECTED"
+# 	\(datatable = "") {
+# 		datatable[c(1:4)] <- data.table::data.table(
+# 			as.Date(
+# 				paste(datatable[ ,YEAR], datatable[ ,MONTH], datatable[ ,DAY], sep = "-"), 
+# 				format = "%Y-%m-%e"
+# 			),
+# 			NULL,
+# 			NULL,
+# 			NULL
+# 		)
+# 	}
+# )

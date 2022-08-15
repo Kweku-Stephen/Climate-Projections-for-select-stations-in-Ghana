@@ -531,6 +531,12 @@ gridExtra::grid.arrange(
 				aes(x = Date, y = RCP45, col = "RCP45"), lwd = 1) +
 		geom_line(data = subset(`Ensembles of scenarios Navrongo`, Date >= 2022), 
 				aes(x = Date, y = RCP85, col = "RCP85"), lwd = 1) +
+		geom_smooth(data = subset(`Ensembles of scenarios Navrongo`, Date >= 2022), 
+				aes(x = Date, y = RCP26, col = "RCP26"), lwd = 1, method = "loess")  +
+		geom_smooth(data = subset(`Ensembles of scenarios Navrongo`, Date >= 2022), 
+				aes(x = Date, y = RCP45, col = "RCP45"), lwd = 1, method = "loess") +
+		geom_smooth(data = subset(`Ensembles of scenarios Navrongo`, Date >= 2022), 
+				aes(x = Date, y = RCP85, col = "RCP85"), lwd = 1, method = "loess") +
 		scale_colour_manual("", breaks = c("Observed","Ensemble","Historical", "RCP26", "RCP45", "RCP85"),
 						values = c("darkblue","black", "grey85", "red", "darkgreen", "brown")) +
 		scale_x_continuous(breaks = seq(1980,2100 ,by = 35), limits = c(1980, 2100)) +
