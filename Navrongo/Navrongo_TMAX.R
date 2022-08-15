@@ -14,7 +14,7 @@ Sys.setenv("_R_USE_PIPEBIND_" = "true")
 
 
 # Unzipping file
-dir(pattern = ".zip") |> 
+dir(pattern = "Navrongo.zip") |> 
 	archive::archive_extract()
 
 
@@ -26,7 +26,7 @@ dir(
 ) |> 
 	lapply(
 		read.csv,
-		na.strings = c("-99.9", "-9999", "-9988", "-99")
+		na.strings = c("-99.9", "-9999", "-9988", "-99", "9999", "9988")
 	) |>
 	setNames(
 		dir(
@@ -82,12 +82,31 @@ lapply(
 
 # Validating removed duplicated dates
 Navrongo_TMAX_RCP26_Corrected_unduplicated |> 
-	lapply(\(data = "") any(data[duplicated(data[ ,"Date"]), ]))
-# Removing duplicates in dates
-Navrongo_TMAX_RCP26_Corrected_unduplicated %<>%
+	lapply(\(data = "") any(duplicated(data[ ,"Date"]))) # if duplicates still present, we run the code below
+
+# checking duplicated dates
+Navrongo_TMAX_RCP26_Corrected_unduplicated |> 
+	lapply(\(data = "") data[duplicated(data[ ,"Date"]), ])
+
+# # Removing duplicates in dates (this removes )
+# Navrongo_TMAX_RCP26_Corrected_unduplicated %<>%
+# 	lapply(
+# 		\(data = "") data[!duplicated(data[ ,"Date"]), ]
+# 	)
+
+# setting all duplicate involved date'S `TMAX` to NA (Include this if Tmax values are non zeros)
+Navrongo_TMAX_RCP26_Corrected_unduplicated %<>% 
 	lapply(
-		\(data = "") data[!duplicated(data[ ,"Date"]), ]
+		#Navrongo_TMAX_RCP26_Corrected_unduplicated,
+		\(data = "") {
+			dups <- data[duplicated((data[ ,"Date"])), "Date"]
+			dt <- data[!duplicated(data[ ,"Date"]), ]
+			dt[dt[ ,"Date"] %in% dups, 2] <- NA
+			dt
+		}
 	)
+
+
 
 # poulating missing years in each dataframe of the list "Navrongo_RR_Corrected_unduplicated"
 Navrongo_TMAX_RCP26_Corrected_unduplicated %<>%
@@ -167,7 +186,7 @@ dir(
 ) |> 
 	lapply(
 		read.csv,
-		na.strings = c("-99.9", "-9999", "-9988", "-99")
+		na.strings = c("-99.9", "-9999", "-9988", "-99", "9999", "9988")
 	) |>
 	setNames(
 		dir(
@@ -224,11 +243,32 @@ lapply(
 # Validating removed duplicated dates
 Navrongo_TMAX_RCP45_Corrected_unduplicated |> 
 	lapply(\(data = "") any(data[duplicated(data[ ,"Date"]), ]))
-# Removing duplicates in dates
-Navrongo_TMAX_RCP45_Corrected_unduplicated %<>%
-	lapply(
-		\(data = "") data[!duplicated(data[ ,"Date"]), ]
-	)
+
+# # checking duplicated dates
+# Navrongo_TMAX_RCP26_Corrected_unduplicated |> 
+# 	lapply(\(data = "") data[duplicated(data[ ,"Date"]), ])
+
+# since there are no duplicates, we comment the code  chunk below
+# # Removing duplicates in dates
+# Navrongo_TMAX_RCP45_Corrected_unduplicated %<>%
+# 	lapply(
+# 		\(data = "") data[!duplicated(data[ ,"Date"]), ]
+# 	)
+
+# # setting all duplicate involved date'S `TMAX` to NA (Include this if Tmax values are non zeros)
+# Navrongo_TMAX_RCP26_Corrected_unduplicated %<>% 
+# 	lapply(
+# 		#Navrongo_TMAX_RCP26_Corrected_unduplicated,
+# 		\(data = "") {
+# 			dups <- data[duplicated((data[ ,"Date"])), "Date"]
+# 			dt <- data[!duplicated(data[ ,"Date"]), ]
+# 			dt[dt[ ,"Date"] %in% dups, 2] <- NA
+# 			dt
+# 		}
+# 	)
+
+
+
 
 # poulating missing years in each dataframe of the list "Navrongo_RR_Corrected_unduplicated"
 Navrongo_TMAX_RCP45_Corrected_unduplicated %<>%
@@ -311,7 +351,7 @@ dir(
 ) |> 
 	lapply(
 		read.csv,
-		na.strings = c("-99.9", "-9999", "-9988", "-99")
+		na.strings = c("-99.9", "-9999", "-9988", "-99", "9999", "9988")
 	) |>
 	setNames(
 		dir(
@@ -367,12 +407,27 @@ lapply(
 
 # Validating removed duplicated dates
 Navrongo_TMAX_RCP85_Corrected_unduplicated |> 
-	lapply(\(data = "") any(data[duplicated(data[ ,"Date"]), ]))
-# Removing duplicates in dates
-Navrongo_TMAX_RCP85_Corrected_unduplicated %<>%
+	lapply(\(data = "") any(duplicated(data[ ,"Date"])))
+
+# checking duplicated dates
+Navrongo_TMAX_RCP85_Corrected_unduplicated |> 
+	lapply(\(data = "") data[duplicated(data[ ,"Date"]), ])
+
+# setting all duplicate involved date'S `TMAX` to NA (Include this if Tmax values are non zeros)
+Navrongo_TMAX_RCP85_Corrected_unduplicated %<>% 
 	lapply(
-		\(data = "") data[!duplicated(data[ ,"Date"]), ]
+		#Navrongo_TMAX_RCP26_Corrected_unduplicated,
+		\(data = "") {
+			dups <- data[duplicated((data[ ,"Date"])), "Date"]
+			dt <- data[!duplicated(data[ ,"Date"]), ]
+			dt[dt[ ,"Date"] %in% dups, 2] <- NA
+			dt
+		}
 	)
+
+
+
+
 
 # poulating missing years in each dataframe of the list "Navrongo_RR_Corrected_unduplicated"
 Navrongo_TMAX_RCP85_Corrected_unduplicated %<>%
@@ -394,9 +449,9 @@ Navrongo_TMAX_RCP85 <- lapply(
 	
 	\(data = "") {
 		if(identical(Navrongo_TMAX_RCP85_Corrected_unduplicated[[1]], data)){
-			data[ ,c("Date", "Rain")]
+			data[ ,c("Date", "Tmax")]
 		} else{
-			data[ ,"Rain"]
+			data[ ,"Tmax"]
 		}
 	}
 ) |> . =>
@@ -404,7 +459,7 @@ Navrongo_TMAX_RCP85 <- lapply(
 	setNames(c("Date", "CNRM", "CM5A", "MIROC5")) |>  . =>
 	within(
 		.,
-		{Ensemble = apply(.[, -1], 1, mean)}
+		{Ensemble = apply(.[, -1], 1, mean, na.rm = TRUE)}
 	)
 
 # Navrongo_RR_RCP85 <- data.frame(
@@ -446,7 +501,7 @@ split(
 
 
 # Building all Ensembles into a dataframe ####
-`Ensembles of scenarios TMAX` <- data.frame(
+`Ensembles of scenarios TMAX Navrongo` <- data.frame(
 	Date = as.numeric(rownames(Navrongo_MeanTMAX_RCP26)),
 	RCP26 = Navrongo_MeanTMAX_RCP26[ ,"Ensemble"],
 	RCP45 = Navrongo_MeanTMAX_RCP45[ ,"Ensemble"],
@@ -454,15 +509,15 @@ split(
 ) |> 
 	subset(Date >= 1980)
 
-# Observed, historicals of scenarios plus emsemble of historical of scenarios ####
-`observed + Hist_scenarios TMAX` = data.frame(
+# Observed, historicals of scenarios plus eNsemble of historical of scenarios ####
+`observed + Hist_scenarios TMAX Navrongo` = data.frame(
 	observed = read.csv(
-		"C:/Users/pc/OneDrive/Documents/Climate_of_Select_Stations/Navrongo Mean Tmp.csv",
+		"C:/Users/pc/OneDrive/Documents/Climate_of_Select_Stations/Navongo Max Tmp.csv",
 		col.names = c("Year", "observed")
 	),
-	RCP26 = subset(`Ensembles of scenarios TMAX`, Date <= 2021)[ ,"RCP26"],
-	RCP45 = subset(`Ensembles of scenarios TMAX`, Date <= 2021)[ ,"RCP45"],
-	RCP85 = subset(`Ensembles of scenarios TMAX`, Date <= 2021)[ ,"RCP85"]
+	RCP26 = subset(`Ensembles of scenarios TMAX Navrongo`, Date <= 2021)[ ,"RCP26"],
+	RCP45 = subset(`Ensembles of scenarios TMAX Navrongo`, Date <= 2021)[ ,"RCP45"],
+	RCP85 = subset(`Ensembles of scenarios TMAX Navrongo`, Date <= 2021)[ ,"RCP85"]
 ) |> . =>
 	within(
 		.,
@@ -476,33 +531,4 @@ split(
 		}
 	) |>
 	setNames(c("Year", "observed", "RCP26", "RCP45", "RCP85", "Ensemble of hist scenarios"))
-
-
-
-
-
-
-
-#  rainfall Visualizations ####
-ggplot(data = `Ensembles of scenarios`,aes(x = Date)) +
-	geom_line(data = `observed + Hist_scenarios`, aes(x = Year, y = RCP26, col = "Historical"), lwd = 1) +
-	geom_line(data = `observed + Hist_scenarios`, aes(x = Year, y = RCP45, col = "Historical"), lwd = 1) +
-	geom_line(data = `observed + Hist_scenarios`, aes(x = Year, y = RCP85, col = "Historical"), lwd = 1) +
-	geom_line(data = `observed + Hist_scenarios`, aes(x = Year, y = `Ensemble of hist scenarios`, col = "Ensemble"), lwd = 1) +
-	geom_line(data = `observed + Hist_scenarios`, aes(x = Year, y = observed, col = "Observed"), lwd = 2)+
-	geom_line(data = subset(`Ensembles of scenarios`, Date >= 2022), 
-			aes(x = Date, y = RCP26, col = "RCP26"), lwd = 1) +
-	geom_line(data = subset(`Ensembles of scenarios`, Date >= 2022), 
-			aes(x = Date, y = RCP45, col = "RCP45"), lwd = 1) +
-	geom_line(data = subset(`Ensembles of scenarios`, Date >= 2022), 
-			aes(x = Date, y = RCP85, col = "RCP85"), lwd = 1) +
-	scale_colour_manual("", breaks = c("Observed","Ensemble","Historical", "RCP26", "RCP45", "RCP85"),
-					values = c("darkblue","black", "grey85", "red", "darkgreen", "brown")) +
-	scale_x_continuous(breaks = seq(1980,2100 ,by = 35), limits = c(1980, 2100)) +
-	labs(subtitle = "Navrongo Rainfall", y = "Rainfall(mm)", x = "Year") +
-	theme(plot.subtitle = element_text(size = 23, hjust = 0, face = "bold"),
-		 axis.text = element_text(size = 30),
-		 axis.title = element_text(size = 28),
-		 legend.text = element_text(size = 26))
-
 
