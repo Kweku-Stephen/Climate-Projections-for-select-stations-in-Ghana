@@ -1,5 +1,5 @@
 ###################################################################################################################
-# Creating Ouput folders ####
+# Creating Output folders ####
 for(dir in c("Data_Outputs", "Plots_Outputs")) {
 	if(dir %in% dir()) {
 		message("dir exists")
