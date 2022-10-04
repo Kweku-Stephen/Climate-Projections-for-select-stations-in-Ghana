@@ -540,49 +540,49 @@ gridExtra::grid.arrange(
 		scale_colour_manual("", breaks = c("Observed","Ensemble","Historical", "RCP26", "RCP45", "RCP85"),
 						values = c("darkblue","black", "grey85", "red", "darkgreen", "brown")) +
 		scale_x_continuous(breaks = seq(1980,2100 ,by = 35), limits = c(1980, 2100)) +
-		labs(subtitle = "Koforiduah Rainfall", y = "Rainfall(mm)", x = "Year") +
+		labs(subtitle = "Koforidua Rainfall", y = "Rainfall(mm)", x = "Year") +
 		theme(plot.subtitle = element_text(size = 23, hjust = 0, face = "bold"),
 			 axis.text = element_text(size = 30),
 			 axis.title = element_text(size = 28),
 			 legend.text = element_text(size = 26)),
 	
 	ggplot(data = `Ensembles of scenarios TMAX Koforiduah`,aes(x = Date)) +
-		geom_line(data = `observed + Hist_scenarios TMAX`, aes(x = Year, y = RCP26, col = "Historical"), lwd = 1) +
-		geom_line(data = `observed + Hist_scenarios TMAX`, aes(x = Year, y = RCP45, col = "Historical"), lwd = 1) +
-		geom_line(data = `observed + Hist_scenarios TMAX`, aes(x = Year, y = RCP85, col = "Historical"), lwd = 1) +
-		geom_line(data = `observed + Hist_scenarios TMAX`, aes(x = Year, y = `Ensemble of hist scenarios`, col = "Ensemble"), lwd = 1) +
-		geom_line(data = `observed + Hist_scenarios TMAX`, aes(x = Year, y = observed, col = "Observed"), lwd = 2)+
-		geom_line(data = subset(`Ensembles of scenarios TMAX`, Date >= 2022), 
+		geom_line(data = `observed + Hist_scenarios TMAX Koforiduah`, aes(x = Year, y = RCP26, col = "Historical"), lwd = 1) +
+		geom_line(data = `observed + Hist_scenarios TMAX Koforiduah`, aes(x = Year, y = RCP45, col = "Historical"), lwd = 1) +
+		geom_line(data = `observed + Hist_scenarios TMAX Koforiduah`, aes(x = Year, y = RCP85, col = "Historical"), lwd = 1) +
+		geom_line(data = `observed + Hist_scenarios TMAX Koforiduah`, aes(x = Year, y = `Ensemble of hist scenarios`, col = "Ensemble"), lwd = 1) +
+		geom_line(data = `observed + Hist_scenarios TMAX Koforiduah`, aes(x = Year, y = observed, col = "Observed"), lwd = 2)+
+		geom_line(data = subset(`Ensembles of scenarios TMAX Koforiduah`, Date >= 2022), 
 				aes(x = Date, y = RCP26, col = "RCP26"), lwd = 1) +
-		geom_line(data = subset(`Ensembles of scenarios TMAX`, Date >= 2022), 
+		geom_line(data = subset(`Ensembles of scenarios TMAX Koforiduah`, Date >= 2022), 
 				aes(x = Date, y = RCP45, col = "RCP45"), lwd = 1) +
-		geom_line(data = subset(`Ensembles of scenarios TMAX`, Date >= 2022), 
+		geom_line(data = subset(`Ensembles of scenarios TMAX Koforiduah`, Date >= 2022), 
 				aes(x = Date, y = RCP85, col = "RCP85"), lwd = 1) +
 		scale_colour_manual("", breaks = c("Observed","Ensemble","Historical", "RCP26", "RCP45", "RCP85"),
 						values = c("darkblue","black", "grey85", "red", "darkgreen", "brown")) +
 		scale_x_continuous(breaks = seq(1980,2100 ,by = 35), limits = c(1980, 2100)) +
-		labs(subtitle = "Koforiduah Maximum Temperature", y = expression("Temperature("~degree*C*")"), x = "Year") +
+		labs(subtitle = "Koforidua Maximum Temperature", y = expression("Temperature("~degree*C*")"), x = "Year") +
 		theme(plot.subtitle = element_text(size = 23, hjust = 0, face = "bold"),
 			 axis.text = element_text(size = 30),
 			 axis.title = element_text(size = 28),
 			 legend.text = element_text(size = 26)),
 	
 	ggplot(data = `Ensembles of scenarios TMIN Koforiduah`,aes(x = Date)) +
-		geom_line(data = `observed + Hist_scenarios TMIN Kofordua`, aes(x = Year, y = RCP26, col = "Historical"), lwd = 1) +
-		geom_line(data = `observed + Hist_scenarios TMIN Kofordua`, aes(x = Year, y = RCP45, col = "Historical"), lwd = 1) +
-		geom_line(data = `observed + Hist_scenarios TMIN Kofordua`, aes(x = Year, y = RCP85, col = "Historical"), lwd = 1) +
-		geom_line(data = `observed + Hist_scenarios TMIN Kofordua`, aes(x = Year, y = `Ensemble of hist scenarios`, col = "Ensemble"), lwd = 1) +
-		geom_line(data = `observed + Hist_scenarios TMIN Kofordua`, aes(x = Year, y = observed, col = "Observed"), lwd = 2)+
-		geom_line(data = subset(`Ensembles of scenarios TMIN`, Date >= 2022), 
+		geom_line(data = `observed + Hist_scenarios TMIN Koforiduah`, aes(x = Year, y = RCP26, col = "Historical"), lwd = 1) +
+		geom_line(data = `observed + Hist_scenarios TMIN Koforiduah`, aes(x = Year, y = RCP45, col = "Historical"), lwd = 1) +
+		geom_line(data = `observed + Hist_scenarios TMIN Koforiduah`, aes(x = Year, y = RCP85, col = "Historical"), lwd = 1) +
+		geom_line(data = `observed + Hist_scenarios TMIN Koforiduah`, aes(x = Year, y = `Ensemble of hist scenarios`, col = "Ensemble"), lwd = 1) +
+		geom_line(data = `observed + Hist_scenarios TMIN Koforiduah`, aes(x = Year, y = observed, col = "Observed"), lwd = 2)+
+		geom_line(data = subset(`Ensembles of scenarios TMIN Koforiduah`, Date >= 2022), 
 				aes(x = Date, y = RCP26, col = "RCP26"), lwd = 1) +
-		geom_line(data = subset(`Ensembles of scenarios TMIN`, Date >= 2022), 
+		geom_line(data = subset(`Ensembles of scenarios TMIN Koforiduah`, Date >= 2022), 
 				aes(x = Date, y = RCP45, col = "RCP45"), lwd = 1) +
-		geom_line(data = subset(`Ensembles of scenarios TMIN`, Date >= 2022), 
+		geom_line(data = subset(`Ensembles of scenarios TMIN Koforiduah`, Date >= 2022), 
 				aes(x = Date, y = RCP85, col = "RCP85"), lwd = 1) +
 		scale_colour_manual("", breaks = c("Observed","Ensemble","Historical", "RCP26", "RCP45", "RCP85"),
 						values = c("darkblue","black", "grey85", "red", "darkgreen", "brown")) +
 		scale_x_continuous(breaks = seq(1980,2100 ,by = 35), limits = c(1980, 2100)) +
-		labs(subtitle = "Koforiduah Minimum Temperature", y = expression("Temperature("~degree*C*")"), x = "Year") +
+		labs(subtitle = "Koforidua Minimum Temperature", y = expression("Temperature("~degree*C*")"), x = "Year") +
 		theme(plot.subtitle = element_text(size = 23, hjust = 0, face = "bold"),
 			 axis.text = element_text(size = 30),
 			 axis.title = element_text(size = 28),
